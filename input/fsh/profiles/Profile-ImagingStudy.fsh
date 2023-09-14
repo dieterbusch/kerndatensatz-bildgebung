@@ -1,3 +1,7 @@
+
+Alias: $CodingOPS = http://fhir.de/StructureDefinition/CodingOPS
+Alias: $ops = http://fhir.de/ValueSet/bfarm/ops
+
 Profile: MII_PR_ImagingStudy_ImagingStudy
 Parent: ImagingStudy
 Id: mii-pr-imagingstudy-imagingstudy
@@ -10,9 +14,7 @@ Description: "Dieses Profil beschreibt die Medikation, die angesetzt, geplant od
 * insert PR_CS_VS_Version
 
 
-Alias: $CodingOPS = http://fhir.de/StructureDefinition/CodingOP
 
-Alias: $ops = http://fhir.de/ValueSet/bfarm/ops
 
 * procedureCode ^constraint.source = "https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/ImagingStudy"
 * procedureCode.coding 1.. MS
@@ -26,6 +28,6 @@ Alias: $ops = http://fhir.de/ValueSet/bfarm/ops
 * code.coding[ops] from $ops (required)
 
 
-* reasonReference 0..* Reference(Condition or Observation or DiagnosticReport or DocumentReference)
+* reasonReference only Reference(Condition or Observation or DiagnosticReport or DocumentReference)
 * endpoint 1..1
-* basedOn 0..* Reference(CarePlan or ServiceRequest or Appointment)
+* basedOn only Reference(CarePlan or ServiceRequest or Appointment)
