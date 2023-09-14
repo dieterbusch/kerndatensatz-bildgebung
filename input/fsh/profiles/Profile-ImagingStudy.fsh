@@ -10,15 +10,22 @@ Description: "Dieses Profil beschreibt die Medikation, die angesetzt, geplant od
 * insert PR_CS_VS_Version
 
 
+Alias: $CodingOPS = http://fhir.de/StructureDefinition/CodingOP
 
+Alias: $ops = http://fhir.de/ValueSet/bfarm/ops
 
+* procedureCode ^constraint.source = "https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/ImagingStudy"
+* procedureCode.coding 1.. MS
+* procedureCode.coding ^slicing.discriminator.type = #pattern
+* procedureCode.coding ^slicing.discriminator.path = "$this"
+* procedureCode.coding ^slicing.rules = #open
+* procedureCode.coding contains
+    ops 0..1 MS and
+    sct 0..1 MS
+* code.coding[ops] only $CodingOPS
+* code.coding[ops] from $ops (required)
 
-* procedureCode[x] 1..* from URL
 
 * reasonReference 0..* Reference(Condition or Observation or DiagnosticReport or DocumentReference)
 * endpoint 1..1
 * basedOn 0..* Reference(CarePlan or ServiceRequest or Appointment)
-* encounter 0..1 Reference(Encounter)
-*
-
-
